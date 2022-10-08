@@ -10,6 +10,7 @@ bool p1Move(int x, int y);
 bool p2Move(int x, int y);
 bool compMove(int x, int y);
 void updateBoard();
+void clearBoard();
 
 char board[3][3] = {{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
 int movesMade=0;
@@ -20,6 +21,13 @@ int main(){
     int menuOption;
     time_t t;
     srand((unsigned)time(&t));
+    int playAgain;
+
+    do{
+        //resets all variables
+        clearBoard();
+        movesMade=0;
+        menuOption=0;
 
     //prompt user for game they wish to play
     printf("Welcome to TicTacToe.\n1---person vs person\n2---person vs random computer\nEnter your choice 1 or 2\n");
@@ -157,6 +165,9 @@ int main(){
 
 
     }
+    printf("\nWould you like to play again?\n1. Yes\n2. No\n");
+    scanf("%d",&playAgain);
+    }while(playAgain==1);
     
    
 
@@ -249,5 +260,13 @@ void updateBoard(){
             printf("|%c",board[i][j]);
         }
         printf("|\n");
+    }
+}
+
+void clearBoard(){
+    for(int i =0; i< 3; i++){
+        for(int j =0; j<3; j++){
+            board[i][j]=' ';
+        }
     }
 }
