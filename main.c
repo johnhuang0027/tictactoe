@@ -27,9 +27,33 @@ int main(){
         startBoard();
 
         //keeps asking for more moves until there is a draw or one of the players win
-        while(draw==false)
-        printf("Player 1 move:\n");
-        scanf("%d %d", &x,&y);
+        while(draw==false){
+            //asks player1 for move
+            printf("Player 1 move:\n");
+            scanf("%d %d", &x,&y);
+            x--;
+            y--;
+
+            //checks if the input is valid and then updates the board
+            if(x>=0 && x<3 && y>=0 && x<3){
+                //update board
+                if(player1W)
+                    break;
+            }
+
+            //asks player2 for move
+            printf("Player 2 move:\n");
+            scanf("%d %d",&x, &y);
+            x--;
+            y--;
+
+            //checks if input is valid and then updates the board
+            if(x>=0 && x<3 && y>=0 && x<3){
+                //update board
+                if(player2W)
+                    break;
+            }
+        }
     }else if(menuOption==2){
 
     }
