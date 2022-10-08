@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <stdbool.h>
 
 void printBoard();
 
 //Tic Tac Toe game between 2 players or player vs computer
 int main(){
 
-    char str[100];
+    char board[3][3];
     int menuOption;
     //prompt user for game they wish to play
     printf("Welcome to TicTacToe.\n1---person vs person\n2---person vs random computer\nEnter your choice 1 or 2\n");
@@ -19,14 +20,18 @@ int main(){
         scanf("%d",&menuOption);
     }
 
-    //print board
+    //read info and print board according to input
     if(menuOption==1){
         int x;
         int y;
-        printBoard();
+        startBoard();
 
+        //keeps asking for more moves until there is a draw or one of the players win
+        while(draw==false)
         printf("Player 1 move:\n");
         scanf("%d %d", &x,&y);
+    }else if(menuOption==2){
+
     }
     
     //read information from console
@@ -38,13 +43,32 @@ int main(){
     return 0;
 }
 
-void printBoard(){
-    printf("+-------------+\n");
-    printf("|  |  |  |\n");
-    printf("+-------------+\n");
-    printf("|  |  |  |\n");
-    printf("+-------------+\n");
-    printf("|  |  |  |\n");
-    printf("+-------------+\n");
+void startBoard(){
+    printf("+---------+\n");
+    printf("| | | |\n");
+    printf("+---------+\n");
+    printf("| | | |\n");
+    printf("+---------+\n");
+    printf("| | | |\n");
+    printf("+---------+\n");
 
 }
+
+//checks if the game has become a draw
+bool draw(int count){
+    if(count<9)
+    return false;
+    
+    return true;
+}
+
+//checks the winning condition for player1
+bool player1W(){
+
+}
+
+//checks the winning condition for player2
+bool player2w(){
+
+}
+
