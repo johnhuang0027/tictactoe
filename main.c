@@ -8,6 +8,7 @@ bool draw(int count);
 bool winCond();
 bool p1Move(int x, int y);
 bool p2Move(int x, int y);
+bool compMove(int x, int y);
 void updateBoard();
 
 char board[3][3] = {{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
@@ -17,6 +18,8 @@ int movesMade=0;
 int main(){
 
     int menuOption;
+    time_t t;
+    srand((unsigned)time(&t));
 
     //prompt user for game they wish to play
     printf("Welcome to TicTacToe.\n1---person vs person\n2---person vs random computer\nEnter your choice 1 or 2\n");
@@ -99,6 +102,59 @@ int main(){
         }
 
     }else if(menuOption==2){ //plays player vs computer
+        int x;
+        int y;
+        startBoard();
+
+        while(movesMade<=9){
+
+            if(movesMade%2 == 0){ //checks if it is p1's move
+                //asks player1 for move
+                printf("Player move:\n");
+                scanf("%d %d", &x,&y);
+                x--;
+                y--;
+
+                //checks if the input is valid and then updates the board
+                if(x>=0 && x<3 && y>=0 && x<3){
+                    //update board
+                    if(p1Move(x,y)){
+                        updateBoard();
+                        movesMade++;
+                        }
+                    else
+                        continue;
+
+                 }else{ //input is not valid so will ask again and continue to next iteration
+                    printf("invalid input try again\n");
+                    continue;
+                }
+            }
+            
+            //checks if p1 won and breaks if true
+            if(winCond()){
+                printf("Player wins!");
+                break;
+            }
+
+            //computer makes move
+            printf("Computer moves: \n");
+            x=rand()%3;
+            y=rand()%3;
+            while(!compMove(x,y)){
+                x=rand()%3;
+                y=rand()%3;
+            }
+            movesMade++;
+            updateBoard();
+            if(winCond()){
+                printf("Computer wins!");
+                break;
+            }
+
+        }
+
+
 
     }
     
@@ -170,6 +226,16 @@ bool p2Move(int x, int y){
         board[x][y]='X';
     }else if(board[x][y] == 'O'){
         printf("invalid move\n");
+        return false;
+    }
+
+    return true;
+}
+
+bool compMove(int x, int y){
+    if(board[x][y]!='O' && board[x][y]==' '){
+        board[x][y]='X';
+    }else if(board[x][y] == 'O'){
         return false;
     }
 
